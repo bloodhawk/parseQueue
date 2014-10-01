@@ -34,6 +34,7 @@ app2.directive('notify', function ($q) {
     return {
         restrict: 'AE',
        scope: {   
+            func: '&',
             title: '=',
             body: '=',
             icon: '='
@@ -53,16 +54,26 @@ app2.directive('notify', function ($q) {
             var nBind = function(perm){
                 if (perm === "granted") {
                     element.bind('click', function () {
-                        var n = new Notification(scope.title, {body: scope.body, icon: scope.icon});
-                        n.onshow = function () {
-                            setTimeout(function () {
+                       scope.request().then(function(){
+                            var n = new Notification(scope.title, {body: scope.body, icon: scope.icon});
+                            n.onshow = function () {
+                                setTimeout(function () {
                                 n.close();
-                            }, 5000);
-                        };
+                                }, 5000);
+                            };
+                       });
                     });
                 }
             };
             getPerms().then(nBind);
         }
     }
+    /*
+     var n = new Notification(scope.title, {body: scope.body, icon: scope.icon});
+                        n.onshow = function () {
+                            setTimeout(function () {
+                                n.close();
+                            }, 5000);
+                        };
+    */
 });

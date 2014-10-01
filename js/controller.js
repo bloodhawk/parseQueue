@@ -1,4 +1,4 @@
-app.controller('mainCtrl', function($scope, parseService){
+app.controller('mainCtrl', function($scope, $q, parseService){
 	$scope.questions = [];
 	$scope.editStatus = function(q){
 		var id = q.objectId;
@@ -9,6 +9,11 @@ app.controller('mainCtrl', function($scope, parseService){
 		});
 	};
 	$scope.postData = function(){
+		var defer = $q.defer();
+		if($scope.question === undefined || $scope.question === ''){
+			defer.resolve();
+			return defer.promise;
+		}
 		var status = 'new';
 		return parseService.postData($scope.question, status).then(function(question){
 			$scope.questions.push(question);
@@ -33,5 +38,14 @@ app.controller('mainCtrl', function($scope, parseService){
 	$scope.cancel = function(){
 		$scope.question = '';
 	};
+	var getPerms = function () {
+        Notification.requestPermission(function (permission) {
+            if (Notification.permission !== permission) {
+                Notification.permission = permission;
+            }
+        });
+    };
+
 	$scope.getData();
+	getPerms();
 });
