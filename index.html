@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-md-offset-2 col-md-8 input-area">
 			Enter a question: <input ng-model="question" type="text">
-			<button class="btn btn-success btn-md" ng-click="postData()">Submit Question</button>
+			<button class="btn btn-success btn-md" pending-spinner request="postData()" spinner-source="/img/spinner.gif" spinner-width="50px" spinner-height="50px" >Submit Question</button>
 			<button ng-click="cancel()" class="btn btn-warning">Cancel</button>  
 		</div>
 	</div>
@@ -69,7 +69,9 @@
 		</div>
 	</div>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script src="/js/directives.js"></script>
 <script src="/js/app.js"></script>
 <script src="/js/controller.js"></script>
 <script src="/js/service.js"></script>

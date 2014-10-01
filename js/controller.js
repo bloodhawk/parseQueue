@@ -10,7 +10,7 @@ app.controller('mainCtrl', function($scope, parseService){
 	};
 	$scope.postData = function(){
 		var status = 'new';
-		parseService.postData($scope.question, status).then(function(question){
+		return parseService.postData($scope.question, status).then(function(question){
 			$scope.questions.push(question);
 			$scope.question = '';
 		});
