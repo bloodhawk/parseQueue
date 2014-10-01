@@ -5,7 +5,14 @@ app.controller('mainCtrl', function($scope, $q, parseService){
 		var status = 'helped';
 		parseService.putData(status, id).then(function(){
 			q.status = 'helped';
-			q.update
+			var title = "Status changed to being helped";
+			var icon = "/img/help.png";
+			var n = new Notification(title, {body: 'Question: ' + q.question + ' changed.', icon: icon});
+            	n.onshow = function () {
+                	setTimeout(function () {
+                    	n.close();
+                    }, 5000);
+                };
 		});
 	};
 	$scope.postData = function(){
@@ -16,6 +23,14 @@ app.controller('mainCtrl', function($scope, $q, parseService){
 		}
 		var status = 'new';
 		return parseService.postData($scope.question, status).then(function(question){
+			var title = "New Question Submitted";
+			var icon = "/img/question.png";
+			var n = new Notification(title, {body: question.question, icon: icon});
+            	n.onshow = function () {
+                	setTimeout(function () {
+                    	n.close();
+                    }, 5000);
+                };
 			$scope.questions.push(question);
 			$scope.question = '';
 		});
@@ -32,6 +47,14 @@ app.controller('mainCtrl', function($scope, $q, parseService){
 		parseService.deleteData(id).then(function(){
 			if(toD !== -1){
 				$scope.questions.splice(toD, 1);
+				var title = "Question deleted from queue";
+				var icon = "/img/delete.png";
+				var n = new Notification(title, {body: 'Question: ' + d.question + ' deleted.', icon: icon});
+            	n.onshow = function () {
+                	setTimeout(function () {
+                    	n.close();
+                    }, 5000);
+                };
 			}
 		});
 	};
