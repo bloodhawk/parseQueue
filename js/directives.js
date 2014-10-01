@@ -23,4 +23,4 @@ app1.directive('pendingSpinner', function(){
 			element.bind('click', clicked);					
 		}
 	}
-});     
+});

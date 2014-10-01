@@ -58,3 +58,5 @@ body {
 	background: black;
 	color: red;
 }
+
+.ng-cloak { display:none; }
