@@ -1,10 +1,78 @@
 <DOCTYPE html>
-<html>
+<html ng-app="parseQueue">
 <head>
 	<title>ParseQ</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/main.css">
 </head>
-<body>
+<body ng-controller="mainCtrl">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 input-area">
+			Enter a question: <input ng-model="question" type="text">
+			<button class="btn btn-success btn-md" ng-click="postData()">Submit Question</button>
+			<button ng-click="cancel()" class="btn btn-warning">Cancel</button>  
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 queue-waiting">
+			<div class="header col-md-12">
+				<h1>Waiting</h1>
+			</div>
+			<div class="question-waiting col-md-12">
+				<table class="table">
+				    <thead>
+				        <tr>	     
+				            <th>Question</th>
+				            <th>Created At</th> 
+				            <th>Status</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr ng-repeat="q in questions | filter:{status: 'new'}">
+				            <td>{{q.question}}</td>
+				            <td>{{q.createdAt | date:'MM/dd/yyyy @ h:mma'}}</td>
+				            <td>{{q.status}} <div  ng-click="editStatus(q)" class="green pointer glyphicon glyphicon-arrow-right"></div></td>
+				        </tr>
+				    </tbody>
+				</table>
+			</div>
+			
+		</div>
 
-<script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+		<div class="col-md-6 queue-answered">
+			
+			<div class="header col-md-12">
+				<h1>Being Helped</h1>
+			</div>
+			
+			<div class="question-answered col-md-12">
+					<table class="table">
+				    <thead>
+				        <tr>	     
+				            <th>Question</th>
+				            <th>Updated At</th> 
+				            <th>Status</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <tr ng-repeat="q in questions | filter:{status: 'helped'}">
+				            <td>{{q.question}}</td>
+				            <td>{{q.updatedAt | date:'MM/dd/yyyy @ h:mma'}}</td>
+				            <td>{{q.status}}<div ng-click="deleteData(q)" class="red pointer glyphicon glyphicon-remove"></div></td>
+				        </tr>
+				    </tbody>
+				</table>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/controller.js"></script>
+<script src="/js/service.js"></script>
+<script src="/js/headers.js"></script>
 </body>
 </html>

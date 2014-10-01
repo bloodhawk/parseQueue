@@ -1,0 +1,53 @@
+body {
+	background: rgb(145, 140, 216);
+	color: white;
+}
+
+.queue-waiting {
+	background: rgb(252, 50, 15);
+	height: 1000px;
+}
+
+.queue-answered {
+	background: rgb(4, 201, 46);
+	height: 1000px;
+}
+
+
+.header {
+	background: rgb(70, 69, 71);
+	height: 50px;
+	text-align: center;
+}
+
+.header h1 {
+	margin: 5px;
+}
+
+.input-area {
+	font-size: 24px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.input-area input {
+	color: black;
+}
+
+.pointer {
+	border-radius: 5px;
+	margin-left: 10px;
+	cursor: pointer;
+	font-size: 24px;
+	box-shadow: 0 0 15px black;
+}
+
+.green {
+	color: green;
+	background: white;
+}
+
+.red {
+	background: black;
+	color: red;
+}
